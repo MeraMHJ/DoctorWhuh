@@ -1,0 +1,430 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --page-background: #232323;
+    --header-background: #232323;
+    --nav-background: #ff42a0;
+    --sidebar-background: #1a1a1a;
+    --section-dark: #141416;
+    --section-grey: #2b2b32;
+    --surface: #232323;
+    --heading-text: #ffffff;
+    --body-text: #e0e0e6;
+    --accent-text: #ff42a0;
+    --border: #141414;
+}
+
+/* the themes*/
+
+body[data-theme="light"] {
+    --page-background: #f4f5f7;
+    --header-background: #ffffff;
+    --nav-background: #ff42a0;
+    --sidebar-background: #e8edf2;
+    --section-dark: #ffffff;
+    --section-grey: #edf1f5;
+    --surface: #ffffff;
+    --heading-text: #17212b;
+    --body-text: #35424f;
+    --accent-text: #ff42a0;
+    --border: #d5dce3;
+}
+
+body[data-theme="light"] .content-section h2 {
+    color: #ffffff;
+}
+
+body[data-theme="light"] .side,
+body[data-theme="light"] .main,
+body[data-theme="light"] .content-section,
+body[data-theme="light"] .text-block p {
+    color: #17212b;
+}
+
+/*for the burger*/
+body[data-theme="light"] .topnav .icon {
+    color: #ff42a0;
+}
+
+body[data-theme="ash"] .topnav .icon {
+    color: #d6b25e;
+}
+
+body[data-theme="ash"] {
+    --page-background: #061f2b;
+    --header-background: #073b4c;
+    --nav-background: #002e58;
+    --sidebar-background: #082d3a;
+    --section-dark: #062633;
+    --section-grey: #0b4152;
+    --surface: #0a3442;
+    --heading-text: #f4ead2;
+    --body-text: #d8e5e2;
+    --accent-text: #e2ae35;
+    --border: #021820;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--page-background);
+}
+
+/* Header */
+.header {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+    background: var(--header-background);
+    color: var(--heading-text);
+}
+
+.header h1 {
+    font-size: 60px;
+}
+
+/* Top Navigation Bar */
+.topnav {
+    background-color: var(--nav-background);
+    position: relative;
+    display: flex;
+}
+
+.topnav #myLinks {
+    display: flex;
+}
+
+.topnav a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+    font-weight: bold;
+}
+
+.topnav .icon {
+    display: none;
+    background: transparent;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px 16px;
+}
+
+.topnav a:hover {
+    background-color: var(--header-background);
+    color: var(--accent-text);
+}
+
+.topnav a.active {
+    background-color: var(--header-background);
+    color: var(--accent-text);
+}
+
+/* dropdown button */
+.dropbtn {
+    background-color: transparent;
+    color: white;
+    padding: 14px 20px;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+}
+
+.dropbtn span {
+    display: inline-block;
+    font-size: 12px;
+    margin-left: 4px;
+    transition: transform 0.2s ease;
+}
+
+.dropdown {
+    position: relative;
+  }
+  
+ 
+  .dropdown-content {
+        display: none;
+    position: absolute;
+        right: 0;
+        min-width: 170px;
+        background-color: var(--surface);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 2;
+  }
+  
+.theme-option {
+    display: block;
+    width: 100%;
+    color: var(--heading-text);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    font-weight: bold;
+    text-align: left;
+        padding: 12px 16px;
+        white-space: nowrap;
+    }
+
+.dropdown-note {
+    color: var(--body-text);
+    font-size: 0.72rem;
+    font-weight: normal;
+    line-height: 1.3;
+    padding: 10px 16px 6px;
+    white-space: nowrap;
+}
+
+.theme-option:hover,
+.theme-option:focus,
+.theme-option.active {
+    background-color: var(--nav-background);
+        color: white;
+    }
+
+.theme-option[data-theme="ash"]:hover,
+.theme-option[data-theme="ash"]:focus,
+.theme-option[data-theme="ash"].active {
+    background-color: #002e58;
+    color: #e2ae35;
+}
+
+.dropdown.open .dropdown-content {
+    display: block;
+}
+
+.dropdown.open .dropbtn {
+    background-color: var(--header-background);
+    color: var(--accent-text);
+}
+
+.dropdown.open .dropbtn span {
+        transform: rotate(180deg);
+}
+
+/* Layout Columns */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+}
+
+.side {
+    flex: 30%;
+    background-color: var(--sidebar-background);
+    padding: 20px;
+    color: white;
+}
+
+.side p {
+    text-align: justify;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    background-color: var(--surface);
+    border-radius: 4px;
+}
+
+.card img {
+    max-width: 60%;
+}
+
+.button-side {
+    display: block;
+    margin: auto;
+    margin-top: 5%;
+    padding: 12px 18px;
+    background-color: var(--nav-background);
+    border: 2px solid var(--nav-background);
+    color: var(--heading-text);
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: oblique;
+    font-weight: 800;
+    min-height: 44px;
+}
+
+.button-side:hover,
+.button-side:focus-visible {
+    filter: brightness(0.9);
+    outline: 3px solid var(--heading-text);
+    outline-offset: 2px;
+}
+
+.main {
+    flex: 70%;
+    background-color: var(--page-background);
+    padding: 0;
+    text-align: center;
+    color: var(--heading-text);
+}
+
+
+.content-section {
+    padding: 35px 25px;
+    border-bottom: 2px solid var(--border);
+}
+
+/* All Section Headers with BBC Pink */
+.content-section h2 {
+    font-size: 2rem;
+    padding: 1%;
+     margin-bottom: 10px;
+    text-transform: uppercase;
+    color: var(--heading-text);
+    background-color: var(--nav-background);
+    letter-spacing: 0.5px;
+}
+
+/* Dark Black Section Theme */
+.theme-black {
+    background-color: var(--section-dark);
+    color: var(--heading-text);
+}
+
+/* Grey Section Theme */
+.theme-grey {
+    background-color: var(--section-grey);
+    color: var(--heading-text);
+}
+
+/* Flexbox for Image Left / Right */
+.section-content {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.section-content.img-left {
+    flex-direction: row;
+}
+
+
+.section-content.img-right {
+    flex-direction: row;
+}
+
+.section-img {
+    max-width: 220px;
+    width: 50%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border: 2px solid #3a3a44;
+}
+
+.text-block {
+    flex: 1;
+}
+
+.text-block p {
+    text-align: justify;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: var(--body-text);
+}
+
+
+.see-more {
+    color: #ff42a0;
+}
+
+.see-more:visited {
+    color: #d6b25e;
+}
+
+.footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px;
+    text-align: center;
+    background: var(--nav-background);
+    color: var(--heading-text);
+}
+
+/* Mobile View */
+@media screen and (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .topnav {
+        display: block;
+    }
+
+    .topnav #myLinks {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .topnav #myLinks.open {
+        display: flex;
+    }
+
+    .topnav a {
+        float: none;
+        width: 100%;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .topnav .icon {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+    }
+
+    .topnav .dropdown {
+        width: 100%;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .dropbtn {
+        text-align: left;
+        width: 100%;
+    }
+
+    .dropdown-content {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    .theme-option {
+        padding-left: 36px;
+    }
+
+    .button-side {
+        margin-top: 20px;
+        padding: 10px 16px;
+        width: auto;
+        max-width: 100%;
+    }
+
+    .section-content, 
+    .section-content.img-left, 
+    .section-content.img-right {
+        flex-direction: column !important;
+    }
+
+    .section-img {
+        max-width: 100%;
+    }
+}
