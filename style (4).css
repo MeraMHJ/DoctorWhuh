@@ -16,6 +16,7 @@
     --body-text: #e0e0e6;
     --accent-text: #ff42a0;
     --border: #141414;
+    --particle-color: rgba(255, 244, 214, 0.72);
 }
 
 /* the themes*/
@@ -32,6 +33,7 @@ body[data-theme="light"] {
     --body-text: #35424f;
     --accent-text: #ff42a0;
     --border: #d5dce3;
+    --particle-color: rgba(222, 99, 34, 0.52);
 }
 
 body[data-theme="light"] .content-section h2 {
@@ -66,12 +68,59 @@ body[data-theme="ash"] {
     --body-text: #d8e5e2;
     --accent-text: #e2ae35;
     --border: #021820;
+    --particle-color: rgba(177, 233, 255, 0.72);
 }
 
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: var(--page-background);
+}
+
+body::before,
+body::after {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    content: "";
+    pointer-events: none;
+    background-repeat: repeat;
+    background-image:
+        radial-gradient(circle at 26px 38px, var(--particle-color) 0 0.6px, transparent 1.3px),
+        radial-gradient(circle at 119px 147px, var(--particle-color) 0 1.7px, transparent 2.5px),
+        radial-gradient(circle at 73px 91px, var(--particle-color) 0 0.8px, transparent 1.4px),
+        radial-gradient(circle at 201px 31px, var(--particle-color) 0 2.2px, transparent 3px),
+        radial-gradient(circle at 44px 213px, var(--particle-color) 0 0.7px, transparent 1.2px),
+        radial-gradient(circle at 258px 233px, var(--particle-color) 0 2.4px, transparent 3.2px),
+        radial-gradient(circle at 171px 267px, var(--particle-color) 0 0.9px, transparent 1.5px),
+        radial-gradient(circle at 294px 111px, var(--particle-color) 0 1.8px, transparent 2.6px);
+    background-size: 320px 320px;
+    animation: particles-rise 10s linear infinite;
+}
+
+body::before {
+    animation-duration: 8s;
+    animation-delay: -2.7s;
+}
+
+body::after {
+    opacity: 0.8;
+    background-position-x: 137px;
+    mask-image: linear-gradient(to top, #000 0%, #000 24%, transparent 82%);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, #000 24%, transparent 82%);
+    animation-duration: 15s;
+    animation-delay: -6.4s;
+}
+
+@keyframes particles-rise {
+    to { background-position-y: -320px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    body::after {
+        animation: none;
+    }
 }
 
 /* Header */
@@ -323,9 +372,10 @@ body {
     max-width: 220px;
     width: 50%;
     height: auto;
+    transform: translateY(var(--parallax-offset, 0px));
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    border: 2px solid #3a3a44;
+    border: 2px solid var(--border);
 }
 
 .text-block {
@@ -341,11 +391,11 @@ body {
 
 
 .see-more {
-    color: #ff42a0;
+    color: var(--accent-text);
 }
 
 .see-more:visited {
-    color: #d6b25e;
+    color: var(--accent-text);
 }
 
 .footer {
@@ -426,5 +476,11 @@ body {
 
     .section-img {
         max-width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .section-img {
+        transform: none;
     }
 }
