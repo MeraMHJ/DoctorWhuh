@@ -77,6 +77,13 @@ body {
     background-color: var(--page-background);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+    body,
+    body * {
+        transition: background-color 350ms ease, color 350ms ease, border-color 350ms ease;
+    }
+}
+
 body::before,
 body::after {
     position: fixed;
