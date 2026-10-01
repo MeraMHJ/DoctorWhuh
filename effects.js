@@ -2,17 +2,48 @@
     const themeKey = "doctorwhuh-theme";
     const themeButtons = Array.from(document.querySelectorAll(".theme-option"));
 
+    function isValidTheme(theme) {
+        return themeButtons.some(function (button) { return button.dataset.theme === theme; });
+    }
+
+    function updateThemeLinks(theme) {
+        const currentUrl = new URL(window.location.href);
+        const currentDirectory = currentUrl.pathname.slice(0, currentUrl.pathname.lastIndexOf("/"));
+        currentUrl.searchParams.set("theme", theme);
+        try {
+            window.history.replaceState(null, "", currentUrl.href);
+        } catch (error) {}
+
+        document.querySelectorAll("a[href]").forEach(function (link) {
+            const targetUrl = new URL(link.href, currentUrl);
+            const targetDirectory = targetUrl.pathname.slice(0, targetUrl.pathname.lastIndexOf("/"));
+            if (targetUrl.protocol !== currentUrl.protocol || targetUrl.host !== currentUrl.host ||
+                targetDirectory !== currentDirectory || !targetUrl.pathname.toLowerCase().endsWith(".html")) return;
+            targetUrl.searchParams.set("theme", theme);
+            link.href = targetUrl.href;
+        });
+    }
+
     function applyTheme(theme) {
-        if (!themeButtons.some(function (button) { return button.dataset.theme === theme; })) return;
+        if (!isValidTheme(theme)) return;
         document.body.dataset.theme = theme;
         themeButtons.forEach(function (button) {
             button.classList.toggle("active", button.dataset.theme === theme);
         });
+        try {
+            localStorage.setItem(themeKey, theme);
+        } catch (error) {}
+        updateThemeLinks(theme);
     }
 
-    try {
-        applyTheme(localStorage.getItem(themeKey));
-    } catch (error) {}
+    const themeFromUrl = new URLSearchParams(window.location.search).get("theme");
+    let savedTheme = themeFromUrl;
+    if (!isValidTheme(savedTheme)) {
+        try {
+            savedTheme = localStorage.getItem(themeKey);
+        } catch (error) {}
+    }
+    applyTheme(savedTheme);
 
     themeButtons.forEach(function (button) {
         button.addEventListener("click", function () {
